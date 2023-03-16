@@ -1,7 +1,8 @@
 #include "Lista.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-typedef struct Lista {
+typedef struct lista {
     int info;
     Lista *prox;
     int TamAtual;   // Tamanho atual da lista
@@ -16,45 +17,6 @@ int ListaVazia(Lista *l) {
     return (l == NULL);
 }
 
-int GetTamanho(Lista *l) {
-    return l->TamAtual;
-}
-
-Lista* GetPosicao(Lista *l, int elem) {
-    Lista *p = l; //Iterador
-    Lista *Posicoes = CriarLista();
-    
-    if (ListaVazia(l)) {
-        return NULL;
-    }
-
-    else{
-        for (int i = 0; i < GetTamanho(l); i++) {
-            if (p->info == elem) {
-                InsereInicio(Posicoes, i);
-            }
-            p = p->prox;
-        }
-    }
-}
-
-
-int GetElemento(Lista *l, int pos) {
-    Lista *p = l; //Iterador
-
-    if (ListaVazia(l)) {
-        return NULL;
-    }
-
-    else {
-        for (int i = 0; i < GetTamanho(l); i++) {
-            if (i == pos) {
-                return p->info;
-            }
-            p = p->prox;
-        }
-    }
-}
 
 
 
@@ -78,20 +40,12 @@ Lista* SetElemento(Lista *l, int pos, int elem) {
 
 
 
-Lista* InserirElemento (Lista *l, int pos, int elem){
 
-    if ((vazia()) && (pos == 0)) return NULL;
 
-    if (pos == 1){ // insercao no inicio da lista
-        return InsereInicio(l, elem); 
-    }
-    else if (pos == GetTamanho(l) + 1){ // inserção no fim
-        return InserirFim(l, elem); 
-    }
-    else{ // inserção no meio da lista
-        return InsereMeio(l, pos, elem);
-    }
-}
+
+
+// Inserções
+
 
 Lista* InsereInicio(Lista *l, int elem) {
    
@@ -101,33 +55,40 @@ Lista* InsereInicio(Lista *l, int elem) {
     l->TamAtual++;
     return novo;
 
-    Lista *novo= new No();
-    // Insere novo elemento na cabeca da lista
-    novoNo.setConteudo(valor);
-    novoNo.setProx(cabeca);
-    cabeca = novoNo;
-    tamanho++;
-    return true;
+  
 }
 
 
 
 Lista* InsereMeio(Lista *l, int pos, int elem){
+    
+    int cont = 1; //Verifica as posições
 
-    Lista *novo = (Lista*)malloc(sizeof(Lista));
-    Lista *p = l; //Iterador
-
-    for (int i = 0; i < pos - 2; i++) {
-        p = p->prox;
+    
+    Lista *Iterador = l;
+    
+    while ((cont < pos - 1) && (Iterador != null)){ //GetTamanho -1 vai ate a casa anterior ao elemento requerido permitindo operaçao dos ponteiros da lista
+        Iterador = Iterador->prox;
+        cont++;
     }
-
-    novo->info = elem;
-    novo->prox = p->prox;
-    p->prox = novo;
-    l->TamAtual++;
+    
+    if (Iterador == null) return NULL;
+    
+    else{
+        
+        Lista *novo = (Lista*)malloc(sizeof(Lista));
+        novo->info = elem;
+        novo->prox = Iterador->prox;
+        p->prox = novo;
+        l->TamAtual++;
+    }
+    
+    
+    
+    
     return l;
 
-
+/*
     int cont = 1;
     No novoNo = new No(); // Aloca memoria para novo no
     novoNo.setConteudo(dado);
@@ -142,7 +103,79 @@ Lista* InsereMeio(Lista *l, int pos, int elem){
     aux.setProx(novoNo);
     tamanho++;
     return true;
+*/
 }
+
+Lista* InserirElemento (Lista *l, int pos, int elem){
+
+    if ((ListaVazia(l)) && (pos == 0)) return NULL;
+
+    if (pos == 1){ // insercao no inicio da lista
+        return InsereInicio(l, elem); 
+    }
+    else if (pos == GetTamanho(l) + 1){ // inserção no fim
+        return InserirFim(l, elem); 
+    }
+    else{ // inserção no meio da lista
+        return InsereMeio(l, pos, elem);
+    }
+}
+
+
+
+
+
+
+
+
+//gets
+
+Lista* GetPosicao(Lista *l, int elem) {
+    Lista *p = l; //Iterador
+    Lista *Posicoes = CriarLista();
+    
+    if (ListaVazia(l)) {
+        return NULL;
+    }
+
+    else{
+        for (int i = 0; i < GetTamanho(l); i++) {
+            if (p->info == elem) {
+                InsereInicio(Posicoes, i);
+            }
+            p = p->prox;
+        }
+    }
+}
+
+
+int GetTamanho(Lista *l) {
+    return l->TamAtual;
+}
+
+
+
+int GetElemento(Lista *l, int pos) {
+    Lista *p = l; //Iterador
+
+    if (ListaVazia(l)) {
+        return -555;
+    }
+
+    else {
+        for (int i = 0; i < GetTamanho(l); i++) {
+            if (i == pos) {
+                return p->info;
+                break;
+            }
+            p = p->prox;
+        }
+    }
+}
+
+
+
+
 
 
 

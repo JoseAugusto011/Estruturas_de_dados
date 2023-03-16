@@ -2,7 +2,7 @@
  * Implementação do módulo: [Lista com vetores]
  * Autor: [José Augusto da Silva / 20210094705] 
  * Data de Criação:  [15/03/2023]
- * Última alteração: [15/03/2023]
+ * Última alteração: [16/03/2023]
  * Descrição Geral: [Implementar biblioteca de lista dinâmica para trabalho ED] 
 
 */
