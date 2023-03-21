@@ -16,7 +16,7 @@
 ## *Funções Disponíveis:*
 
     1 - Inserir Elemento na Lista                            
-    2 - Remoer Elemento da Lista                    
+    2 - Remover Elemento da Lista                    
     3 - Imprimir Lista                               
     4 - Retornar Elemento na Lista                   
     5 - Retornar Elemento Inicial da Lista           
