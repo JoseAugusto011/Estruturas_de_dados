@@ -1,57 +1,63 @@
-/* 
- * Implementação do módulo: [Lista com vetores]
- * Autor: [José Augusto da Silva / 20210094705] 
- * Data de Criação:  [15/03/2023]
- * Última alteração: [16/03/2023]
- * Descrição Geral: [Implementar biblioteca de lista dinâmica para trabalho ED] 
+#ifndef _LISTA_H
+#define _LISTA_H
 
-*/
+// Lista =  Agrupamento de nós
+// Nó =  Elemento da lista
 
+typedef struct no NO;
+typedef struct Lista LISTA;
 
+// Cria uma lista vazia, composta por um nó cabeça
+LISTA *newList(LISTA *l);
 
-#ifndef _LISTA_H_
-#define _LISTA_H_
+// Ver informações lista
 
-///Testar enumerate e criar tipo booleano
+// Verifica se a lista está vazia
+int emptyList(LISTA *l);
+// Retorna o tamanho da lista
+int getLenght(LISTA *l);
+// Mostra a lista
+void showList(LISTA *l);
 
+// Get's
 
+// Retorna o nó cabeça da lista
+int getHead(LISTA *l);
+// Retorna elemento da posição enviada
+int getElement(LISTA *l, int pos);
+// Retorna a posições em que  elemento enviado está
+int *getPosition(LISTA *l, int elem);
 
-typedef struct lista Lista; // Assinatura do tipo Lista
+// Set's
 
-Lista* CriarLista(void); //Cria uma lista vazia 
+// Insere elemento na posição enviada
+LISTA *setElement(LISTA *l, int pos, int elem);
+// Insere elemento na cabeça da lista
+LISTA *setHead(LISTA *l, int elem);
 
-int ListaVazia(Lista *l); //Retorna 1 se a lista estiver vazia e 0 caso contrário
+// Insert´s
 
-int GetTamanho(Lista *l); //Retorna o tamanho da lista
+// Insere elemento na cabeça da lista
+LISTA *insertHead(LISTA *l, int elem);
+// Insere Elemento no Meio da lista
+LISTA *insertMiddle(LISTA *l, int pos, int elem);
+// Insere elemento no final da lista
+LISTA *insertEnd(LISTA *l, int elem);
+// Insere elemento na posição enviada
+LISTA *insertElement(LISTA *l, int pos, int elem);
 
-int GetElemento(Lista *l, int pos); //Retorna o elemento que estiver na posição pos
+// Remove's
 
-Lista* GetPosicao(Lista *l, int elem); //Retorna todas as posições em que o elemento aparece
+// Remove elemento da cabeça da lista
+LISTA *removeHead(LISTA *l);
+// Remove elemento do meio da lista
+LISTA *removeMiddle(LISTA *l, int pos);
+// Remove elemento do final da lista
+LISTA *removeEnd(LISTA *l);
+// Remove elemento da posição enviada
+LISTA *removeElement(LISTA *l, int pos);
 
-Lista* SetElemento(Lista *l, int pos, int elem); //Altera o elemento que estiver na posição pos
-
-Lista* InserirElemento(Lista *l, int pos, int elem); //Insere o elemento elem na posição pos
-
-Lista* InserirInicio(Lista *l, int elem); //Insere o elemento elem no início da lista
-
-Lista* InsereMeio(Lista *l, int pos, int elem); //Insere o elemento elem no meio da lista
-
-Lista* InserirFim(Lista *l, int elem); //Insere o elemento elem no final da lista
-
-
-Lista* RemoverElemento(Lista *l, int pos); //Remove o elemento que estiver na posição pos
-
-Lista* RemoverInicio(Lista *l); //Remove o elemento que estiver no início da lista
-
-Lista* RemoverMeio(Lista *l, int pos); //Remove o elemento que estiver no meio da lista
-
-Lista* RemoverFim(Lista *l); //Remove o elemento que estiver no final da lista
-
-
-void MostrarLista(Lista *l); //Mostra todos os elementos da lista
-
-void Menu(); //Mostra o menu de opções
-
-
+//Menu de opções
+void Menu(LISTA *l);
 
 #endif
