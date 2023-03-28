@@ -6,5 +6,5 @@ Biblioteca com as principais estruturas de dados que  forem demonstradas durante
 
 * Lista Sequencial (ok)
 * Lista Dinâmica (ok)
-* Pilha (Em Andamento)
+* Pilha (ok)
 * Coming soon ...
