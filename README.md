@@ -4,8 +4,8 @@ Biblioteca com as principais estruturas de dados que  forem demonstradas durante
 
 ## Modulos Disponíveis:
 
-* Lista Sequencial (ok)
-* Lista Dinâmica   (ok)
-* Pilha Sequencial (ok)
-* Pilha Dinâmica   (ok)
+* Lista Sequencial  (ok)
+* Lista Dinâmica    (ok)
+* Pilha Sequencial  (ok)
+* Pilha Dinâmica    (ok)
 * Coming soon ...
