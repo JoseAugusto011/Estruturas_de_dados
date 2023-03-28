@@ -49,7 +49,6 @@ int Top(Stack *l)
         return l->head->info;
 }
 
-
 Stack *Push(Stack *l, int elem)
 {
 
@@ -62,11 +61,6 @@ Stack *Push(Stack *l, int elem)
     return l;
     free(new);
 }
-
-
-
-
-
 
 NO *Pop(Stack **l)
 {
@@ -81,38 +75,52 @@ NO *Pop(Stack **l)
         NO *aux = (*l)->head;
         (*l)->head = (*l)->head->prox;
         (*l)->lenght--;
-        //return l;
+        // return l;
         printf("\n\tElemento Removido: %d\n", aux->info);
         return aux;
         free(aux);
     }
 }
 
+void FreeStack(Stack *l)
+{
+    if (emptyList(l))
+    {
+        printf("\n\tPilha Vazia!\n");
+        return;
+    }
 
-/*
+    else
+    {
 
-void Menu(Stack *l)
+        NO *aux = l->head;
+        while (aux != NULL)
+        {
+            NO *aux2 = aux->prox;
+            free(aux);
+            aux = aux2;
+        }
+        free(l);
+        printf("\n\tPilha Liberada!\n");
+    }
+}
+
+void Menu()
 {
 
-    int op, elem, pos;
-    int *posicoes;
-    op = -1;
+    int op = -1, elem;
+    Stack *l = newList(l);
 
-    while (op != 0)
+    do
     {
-        printf("\n\tMenu de Opcoes: \n");
-        printf("\n\t1 - Inserir Elemento na Stack");
-        printf("\n\t2 - Remover Elemento da Stack");
-        printf("\n\t3 - Imprimir Stack");
-        printf("\n\t4 - Retornar Elemento na Stack ");
-        printf("\n\t5 - Retornar Elemento Inicial da Stack");
-        printf("\n\t6 - Retornar index's de um elemento da Stack");
-        printf("\n\t7 - Alterar Elemento da Stack");
-        printf("\n\t8 - Alterar Elemento Inicial da Stack");
-        printf("\n\t9 - Retornar Tamanho da Stack");
+        printf("\n\tMenu de Opcoes\n");
+        printf("\n\t1 - Insere Elemento na Pilha");
+        printf("\n\t2 - Remove Elemento da Pilha");
+        printf("\n\t3 - Mostra Elemento do Topo da Pilha");
+        printf("\n\t4 - Mostra Tamanho da Pilha");
         printf("\n\t0 - Sair");
 
-        printf("\n\tSelecione uma Opcao: ");
+        printf("\n\n\tOpcao: ");
         scanf("%d", &op);
 
         switch (op)
@@ -120,71 +128,31 @@ void Menu(Stack *l)
         case 1:
             printf("\n\tDigite o elemento a ser inserido: ");
             scanf("%d", &elem);
-            printf("\n\tDigite a posicao do elemento: ");
-            scanf("%d", &pos);
-            l = insertElement(l, pos, elem);
+            l = Push(l, elem);
             break;
         case 2:
-            printf("\n\tDigite a posicao do elemento a ser removido: ");
-            scanf("%d", &pos);
-            l = removeElement(l, pos);
+            Pop(&l);
             break;
 
         case 3:
 
-            showList(l);
+            printf("\n\tElemento do Topo da Pilha: %d\n", Top(l));
             break;
+
         case 4:
-            printf("\n\tDigite a posicao do elemento a ser retornado: ");
-            scanf("%d", &pos);
-            printf("\n\tElemento na posicao %d: %d\n", pos, getElement(l, pos));
-            break;
-
-        case 5:
-            printf("\n\tElemento Inicial da Stack: %d\n", getHead(l));
-            break;
-        case 6:
-
-            printf("\n\tDigite o elemento a ser procurado: ");
-            scanf("%d", &elem);
-            int tam = sizeof(getPosition(l, elem));
-            posicoes = (int *)malloc(sizeof(int) * tam);
-            posicoes = getPosition(l, elem);
-
-            
-
-            for (int i = 0; i < tam; i++)
-            {
-                printf("\n\tPosicao do elemento %d: %d\n", elem, posicoes[i] + 1);
-            }
-            break;
-
-        case 7:
-            printf("\n\tDigite o elemento a ser alterado: ");
-            scanf("%d", &elem);
-            printf("\n\tDigite a posicao do elemento a ser alterado: ");
-            scanf("%d", &pos);
-            l = setElement(l, pos, elem);
-            break;
-
-        case 8:
-            printf("\n\tDigite o elemento a ser alterado: ");
-            scanf("%d", &elem);
-            l = setHead(l, elem);
-            break;
-        case 9:
-            printf("\n\tTamanho da Stack: %d\n", getLenght(l));
+            printf("\n\tTamanho da Pilha: %d\n", getLenght(l));
             break;
 
         case 0:
+
             printf("\n\tSaindo...\n");
+            FreeStack(l);
             break;
 
         default:
-            printf("\n\tOpcao Invalida!\n");
+
+            printf("\n\tOpção Invalida!\n");
             break;
         }
-    }
+    } while (op != 0);
 }
-*/
-

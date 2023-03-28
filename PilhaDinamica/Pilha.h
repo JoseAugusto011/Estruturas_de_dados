@@ -40,8 +40,9 @@ Stack *Push(Stack *l, int elem);
 // Remove elemento da cabeça da Stack
 NO *Pop(Stack **l);
 
+void FreeStack(Stack *l);
 
 //Menu de opções
-void Menu(Stack *l);
+void Menu();
 
 #endif
