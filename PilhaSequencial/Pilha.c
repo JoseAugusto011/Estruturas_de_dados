@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void CriarPilha(Pilha *l)
+void CriarPilha(Pilha **l)
 {
     
-    l->Topo = -1
+    (*l)->Topo = -1;
 }
 
-int PilhaVazia(Pilha *l)
+int PilhaVazia(Pilha **l)
 {
-    if (l->Topo  == -1)
+    if ((*l)->Topo  == -1)
     {
         return 1;
     }
@@ -20,9 +20,9 @@ int PilhaVazia(Pilha *l)
     }
 }
 
-int PilhaCheia(Pilha *l)
+int PilhaCheia(Pilha **l)
 {
-    if (l->Topo == TAM_MAX - 1) //topo começa em -1 e Tam Max comrça em zero
+    if ((*l)->Topo == TAM_MAX - 1) //topo começa em -1 e Tam Max comrça em zero
     {
         return 1;
     }
@@ -32,12 +32,12 @@ int PilhaCheia(Pilha *l)
     }
 }
 
-int GetTamanho(Pilha *l)
+int GetTamanho(Pilha **l)
 {
-    return l->Topo+1; // topo começa em -1 por acresecemos +1 ao resultado, pois se não tivermos nenhum elmento seu tamanho será 0 e não -1
+    return (*l)->Topo+1; // topo começa em -1 por acresecemos +1 ao resultado, pois se não tivermos nenhum elmento seu tamanho será 0 e não -1
 }
 
-int Top(Pilha *l)
+int Top(Pilha **l)
 {
     if (PilhaVazia(l) || PilhaCheia(l) )
     {
@@ -46,13 +46,13 @@ int Top(Pilha *l)
     }
     else
     {
-        return l->vetor[l->Topo];
+        return (*l)->vetor[(*l)->Topo];
     }
 }
 
 
 
-int Push(Pilha *l, int elem)
+int Push(Pilha **l, int elem)
 {
     if (PilhaCheia(l))
     {
@@ -62,108 +62,88 @@ int Push(Pilha *l, int elem)
     else
     {
         
-        l->vetor[l->Topo + 1] = elem;
-        l->Topo++;
+        (*l)->vetor[(*l)->Topo + 1] = elem;
+        (*l)->Topo++;
         return 1;
     }
 }
 
-int RemoverElemento(Pilha *l, int pos)
+int Pop(Pilha **l)
 {
-    if (pos <= 0 || pos >= l->TamanhoAtual)
+    if (PilhaVazia(l))
     {
-        printf("Posicao invalida");
+        printf("Pilha vazia!\n");
         return -1;
     }
     else
     {
-        int i;
-        for (i = pos - 1; i < l->TamanhoAtual; i++)
-        {                                  // i começa na posição do elemento a ser removido
-            l->vetor[i] = l->vetor[i + 1]; // Desloca todos os elementos para a esquerda --> espaço vazio
-        }
-        l->TamanhoAtual--;
-        return 1;
+        int elem = (*l)->vetor[(*l)->Topo];
+        (*l)->Topo--;
+        return elem;
     }
 }
-/*
 
-void Menu()
+void LiberaPilha(Pilha **l)
 {
-
-    Pilha l;
-    CriarPilha(&l);
-    int opcao = -1, valor, posicao, elemento, i; //  *posicoes = retorno da funcao GetPosicao(Pode ser um vetor de inteiros, ou apenas um inteiro)
-    int *posicoes;
-
-    printf("\t\tMENU Pilha:\n\n");
-
-    while (opcao != 0)
+    if (l != NULL)
     {
-        printf("\n\n");
-        printf("1 - Inserir elemento\n");
-        printf("2 - Remover elemento\n");
-        printf("3 - Mostrar Pilha\n");
+        free(l);
+    }
+    else{
+        for (int i = 0; i<GetTamanho(l); i++){
+            Pop(l);
+        }
+    }
+}
+
+
+void Menu(){
+
+    int opcao, elem, pos;
+    opcao = 1;
+
+    Pilha *l = (Pilha *)malloc(sizeof(Pilha));
+
+    CriarPilha(&l);
+
+    while(opcao != 0){
+
+        printf("\n\tMenu de opcoes\n");
+        printf("1 - Push\n");
+        printf("2 - Pop\n");
+        printf("3 - Mostrar elemento do topo\n");
         printf("4 - Mostrar tamanho da Pilha\n");
-        printf("5 - Mostrar elemento de uma posicao\n");
-        printf("6 - Mostrar posicoes de um elemento\n");
-        printf("7 - Alterar elemento de uma posicao\n");
         printf("0 - Sair\n");
-        printf("Opcao: ");
+
+        printf("Digite a opcao desejada: ");
         scanf("%d", &opcao);
 
         switch (opcao)
         {
         case 1:
-            printf("Digite a posicao: ");
-            scanf("%d", &posicao);
-            printf("Digite o elemento: ");
-            scanf("%d", &elemento);
-            InserirElemento(&l, posicao, elemento);
+            printf("Digite o elemento a ser inserido: ");
+            scanf("%d", &elem);
+            Push(&l, elem);
             break;
         case 2:
-            printf("Digite a posicao: ");
-            scanf("%d", &posicao);
-            RemoverElemento(&l, posicao);
-            break;
+            
+            printf("Elemento removido: %d", Pop(&l));
+
         case 3:
-            MostrarPilha(&l);
+            printf("Elemento do topo: %d", Top(&l));
             break;
         case 4:
             printf("Tamanho da Pilha: %d", GetTamanho(&l));
             break;
-        case 5:
-            printf("Digite a posicao: ");
-            scanf("%d", &posicao);
-            printf("Elemento: %d", GetElemento(&l, posicao));
-            break;
-        case 6:
-            printf("Digite o elemento: ");
-            scanf("%d", &elemento);
-            posicoes = (int *)malloc(sizeof(int) * sizeof(GetPosicao(&l, elemento)));
-            posicoes = GetPosicao(&l, elemento);
-            printf("Posicoes: ");
-            for (i = 0; i < l.TamanhoAtual; i++)
-            {
-                printf("%d ", posicoes[i]);
-            }
-            free(posicoes);
-            break;
-        case 7:
-            printf("Digite a posicao: ");
-            scanf("%d", &posicao);
-            printf("Digite o elemento: ");
-            scanf("%d", &elemento);
-            SetElemento(&l, posicao, elemento);
-            break;
         case 0:
-            printf("\nFINALIZANDO PROGRAMA...\n");
+            printf("Saindo...");
+            LiberaPilha(&l);
+
             break;
         default:
-            printf("\nOPCAO INVALIDA!\n");
+            printf("Opcao invalida!");
             break;
         }
     }
 }
 
-*/
