@@ -23,5 +23,6 @@
     6 - Retornar index's de um elemento da Lista     
     7 - Alterar Elemento da Lista                    
     8 - Alterar Elemento Inicial da Lista            
-    9 - Retornar Tamanho da Lista                    
+    9 - Retornar Tamanho da Lista   
+    10 - Inserir Ordenado
     0 - Sair                                         
