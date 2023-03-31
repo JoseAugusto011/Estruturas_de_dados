@@ -7,6 +7,7 @@
 typedef struct no NO;
 typedef struct Lista LISTA;
 
+
 // Cria uma lista vazia, composta por um nó cabeça
 LISTA *newList(LISTA *l);
 
@@ -43,6 +44,8 @@ LISTA *insertHead(LISTA *l, int elem);
 LISTA *insertMiddle(LISTA *l, int pos, int elem);
 // Insere elemento no final da lista
 LISTA *insertEnd(LISTA *l, int elem);
+//Insere elemento em ordem crescente
+LISTA *insertSorted(LISTA *l, int elem);
 // Insere elemento na posição enviada
 LISTA *insertElement(LISTA *l, int pos, int elem);
 

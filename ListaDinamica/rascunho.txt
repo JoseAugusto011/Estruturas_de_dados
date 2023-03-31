@@ -1,0 +1,25 @@
+azia
+tamanho getlenght
+mostra  showList
+
+get cabeca getHead 
+get eleme  getElment 
+get posicoes getPosition 
+
+set cabeca setHead
+set eleme  setElement 
+
+insere insertElement  
+remoe remoeElement 
+
+
+        1 - Inserir Elemento na Lista                            
+        2 - Remoer Elemento da Lista                    
+        3 - Imprimir Lista                               
+        4 - Retornar Elemento na Lista                   
+        5 - Retornar Elemento Inicial da Lista           
+        6 - Retornar index's de um elemento da Lista     
+        7 - Alterar Elemento da Lista                    
+        8 - Alterar Elemento Inicial da Lista            
+        9 - Retornar Tamanho da Lista                    
+        0 - Sair                                         

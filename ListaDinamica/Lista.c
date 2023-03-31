@@ -109,7 +109,7 @@ int *getPosition(LISTA *l, int elem)
 
         NO *iterator = l->head;
         int *pos = (int *)malloc(sizeof(int) * l->lenght);
-        
+
         int i = 0;
 
         while (iterator != NULL)
@@ -119,20 +119,18 @@ int *getPosition(LISTA *l, int elem)
                 pos[i] = i;
                 i++;
             }
-            
+
             iterator = iterator->prox;
         }
 
-        
-        //retorno deverá ser um vetor de inteiros com o tamanho i
+        // retorno deverá ser um vetor de inteiros com o tamanho i
         int *retorno;
         retorno = (int *)malloc(sizeof(int) * i);
-        
+
         retorno = pos;
 
         return retorno;
         free(pos);
-        
     }
 }
 
@@ -247,6 +245,45 @@ LISTA *insertEnd(LISTA *l, int elem)
     return l;
 
     free(new);
+}
+
+LISTA *insertSorted(LISTA *l, int elem)
+{
+
+    if (emptyList(l))
+    {
+        l = insertHead(l, elem);
+        return l;
+    }
+    else
+    {
+
+        NO *new, *iterator;
+
+        iterator = l->head;
+        new = (NO *)malloc(sizeof(NO));
+        new->info = elem;
+        new->prox = NULL;
+
+        if (elem < iterator->info)
+        {
+            l = insertHead(l, elem);
+            return l;
+        }
+        else
+        {
+            while (iterator->prox != NULL && iterator->prox->info < elem)
+            {
+                iterator = iterator->prox;
+            }
+
+            new->prox = iterator->prox;
+            iterator->prox = new;
+            l->lenght++;
+            return l;
+        }
+        free(new);
+    }
 }
 
 LISTA *insertElement(LISTA *l, int pos, int elem)
@@ -388,6 +425,23 @@ LISTA *removeElement(LISTA *l, int pos)
     }
 }
 
+void freeList(LISTA *l)
+{
+
+    NO *iterator, *aux;
+
+    iterator = l->head;
+
+    while (iterator != NULL)
+    {
+        aux = iterator;
+        iterator = iterator->prox;
+        free(aux);
+    }
+
+    free(l);
+}
+
 void Menu(LISTA *l)
 {
 
@@ -407,6 +461,7 @@ void Menu(LISTA *l)
         printf("\n\t7 - Alterar Elemento da Lista");
         printf("\n\t8 - Alterar Elemento Inicial da Lista");
         printf("\n\t9 - Retornar Tamanho da Lista");
+        printf(("\n\t10 - Inserir Elemento  de forma Ordenada na Lista"));
         printf("\n\t0 - Sair");
 
         printf("\n\tSelecione uma Opcao: ");
@@ -448,8 +503,6 @@ void Menu(LISTA *l)
             posicoes = (int *)malloc(sizeof(int) * tam);
             posicoes = getPosition(l, elem);
 
-            
-
             for (int i = 0; i < tam; i++)
             {
                 printf("\n\tPosicao do elemento %d: %d\n", elem, posicoes[i] + 1);
@@ -473,8 +526,15 @@ void Menu(LISTA *l)
             printf("\n\tTamanho da Lista: %d\n", getLenght(l));
             break;
 
+        case 10:
+            printf("\n\tDigite o elemento a ser inserido: ");
+            scanf("%d", &elem);
+            l = insertOrdered(l, elem);
+            break;
+
         case 0:
             printf("\n\tSaindo...\n");
+            freeList(l);
             break;
 
         default:
