@@ -90,7 +90,7 @@ int SetElemento(Lista *l, int pos, int elem)
 
 int InserirElemento(Lista *l, int pos, int elem)
 {
-    if (pos <= 0 || pos > l->TamanhoAtual + 1)
+    if (pos <= 0 || pos > l->TamanhoAtual + 1 || ListaCheia(l))
     {
         printf("Posicao invalida");
         return -1;
@@ -104,6 +104,34 @@ int InserirElemento(Lista *l, int pos, int elem)
         }
         l->vetor[pos - 1] = elem;
         l->TamanhoAtual++;
+        return 1;
+    }
+}
+
+int InserirOrdenado(Lista *l, int elem)
+{
+    if (ListaCheia(l))
+    {
+        printf("Lista cheia");
+        return -1;
+    }
+    else if (ListaVazia(l))
+    {
+        InserirElemento(l, 1, elem);
+        return 1;
+    }
+    else
+    {
+        int i;
+        for (i = 0; i < l->TamanhoAtual; i++)
+        {
+            if (l->vetor[i] > elem)
+            {
+                InserirElemento(l, i + 1, elem);
+                return 1;
+            }
+        }
+        InserirElemento(l, l->TamanhoAtual + 1, elem);
         return 1;
     }
 }
@@ -125,6 +153,11 @@ int RemoverElemento(Lista *l, int pos)
         l->TamanhoAtual--;
         return 1;
     }
+}
+
+void DestruirLista(Lista *l)
+{
+    l->TamanhoAtual = 0;
 }
 
 void MostrarLista(Lista *l)
@@ -158,6 +191,7 @@ void Menu()
         printf("5 - Mostrar elemento de uma posicao\n");
         printf("6 - Mostrar posicoes de um elemento\n");
         printf("7 - Alterar elemento de uma posicao\n");
+        printf("8 - Inserir elemento de forma ordenada\n");
         printf("0 - Sair\n");
         printf("Opcao: ");
         scanf("%d", &opcao);
@@ -205,9 +239,15 @@ void Menu()
             printf("Digite o elemento: ");
             scanf("%d", &elemento);
             SetElemento(&l, posicao, elemento);
+        case 8:
+            printf("Digite o elemento: ");
+            scanf("%d", &elemento);
+            InserirOrdenado(&l, elemento);
+
             break;
         case 0:
             printf("\nFINALIZANDO PROGRAMA...\n");
+            DestruirLista(&l);
             break;
         default:
             printf("\nOPCAO INVALIDA!\n");

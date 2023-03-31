@@ -1,8 +1,8 @@
 /* 
  * Implementação do módulo: [Lista com vetores]
  * Autor: [José Augusto da Silva / 20210094705] 
- * Data de Criação: [09/03/2023]
- * Última alteração: [09/03/2023]
+ * Data de Criação:  [09/03/2023]
+ * Última alteração: [14/03/2023]
  * Descrição Geral: [Implementar biblioteca de lista com vetores para o trabalho de ED] 
 
 */
@@ -38,6 +38,8 @@ int* GetPosicao(Lista *l, int elem); //Retorna todas as posições em que o elem
 int SetElemento(Lista *l, int pos, int elem); //Altera o elemento que estiver na posição pos
 
 int InserirElemento(Lista *l, int pos, int elem); //Insere o elemento elem na posição pos
+
+int InserirOrdenado(Lista *l, int elem); //Insere o elemento elem em ordem crescente
 
 int RemoverElemento(Lista *l, int pos); //Remove o elemento que estiver na posição pos
 
