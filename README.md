@@ -8,4 +8,7 @@ Biblioteca com as principais estruturas de dados que  forem demonstradas durante
 * Lista Dinâmica    (ok)
 * Pilha Sequencial  (ok)
 * Pilha Dinâmica    (ok)
+* Fila Sequencial   (ok)
+* Fila Dinâmica     (ok)
+
 * Coming soon ...
