@@ -576,6 +576,7 @@ void Teste_Instancia(int* ordenar, int tamVetor){
             InicioTemporizador();
             printf("Vetor ordenado:\n");
             Imprimir_vetor(inserction_sort(vetor, tamVetor), tamVetor);
+            printf("\tTempo Inserction: %f\n",CravarCronometro());
 
             break;
 

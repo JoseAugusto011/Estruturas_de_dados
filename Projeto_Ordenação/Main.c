@@ -10,7 +10,8 @@ AUTORES: ARTUR DARTAGNAN e JOSÉ AUGUSTO
 #include <stdio.h>
 
 
-#define FILE_NAME "couting.txt"  //Caso testar outra instancia troque a macro de pré processamento
+//#define FILE_NAME "couting.txt"  //Caso testar outra instancia troque a macro de pré processamento
+#define FILE_NAME "I1000.txt"  //Caso testar outra instancia troque a macro de pré processamento
 
 int main(){
 
@@ -80,6 +81,6 @@ int main(){
   int* instancia_teste;
   instancia_teste = Le_arquivo(FILE_NAME);
   Teste_Instancia(instancia_teste,TamVetor(FILE_NAME));      
-
+  printf("\n\nTeste de Instancia concluido\n\n");
   return 0;
 }
